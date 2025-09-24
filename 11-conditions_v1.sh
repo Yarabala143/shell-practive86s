@@ -22,11 +22,3 @@ for (( i=2; i<=$limit; i++ )); do
     is_prime=0 # Not a prime number
     break
   fi
-done
-
-# Print the result based on the flag
-if [ "$is_prime" -eq 1 ]; then
-  echo "$num is a prime number."
-else
-  echo "$num is not a prime number."
-fi
