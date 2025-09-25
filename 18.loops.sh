@@ -31,5 +31,12 @@ VALIDATE(){ # functions receive inputs through args just like shell script args
 # $@
 for package in $@
 do
-    echo "Package is: $package"
+    dns list installed $package &>>$LOG_FILE
+    # Install if it is not found
+    if [ $? -ne 0 ]; then
+        dnf install $package -y &>>$LOG_FILE
+        VALIDATE $? "$package"
+    else
+        echo -e "$package already exist ... $Y SKIPPING $N" | tee -a $LOG_FILE
+    fi
 done
